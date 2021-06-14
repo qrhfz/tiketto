@@ -1,0 +1,47 @@
+{
+    "name": "tiketto",
+    "version": "1.0.0",
+    "private": true,
+    "engines": {
+        "node": "10.15.1",
+        "npm": "6.13.0"
+    },
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app",
+        "dev": "nodemon app"
+    },
+    "keywords": [],
+    "author": "Fajar Julianto",
+    "license": "ISC",
+    "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.5",
+        "express": "^4.17.1",
+        "express-handlebars": "^4.0.4",
+        "handlebars-helpers": "^0.10.0",
+        "joi-json": "^4.0.0",
+        "multer": "^1.4.2",
+        "mysql2": "^2.1.0",
+        "nodemon": "^2.0.4",
+        "sequelize": "^5.21.11",
+        "sequelize-cli": "^5.5.1",
+        "sweetalert": "^2.1.2",
+        "uuid": "^8.1.0"
+    },
+    "devDependencies": {
+        "handlebars": "^4.5.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Juliantooo/partner_petualang.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Juliantooo/partner_petualang/issues"
+    },
+    "homepage": "https://github.com/Juliantooo/partner_petualang#readme",
+    "description": ""
+}

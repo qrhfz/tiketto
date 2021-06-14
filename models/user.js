@@ -1,0 +1,34 @@
+const Sequelize = require('sequelize')
+const db = require('../config/db')
+
+//user models
+const User = db.define('users', {
+    id_user: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    },
+    nama: {
+        type: Sequelize.STRING
+    },
+    telp: {
+        type: Sequelize.STRING
+    },
+    email: {
+        type: Sequelize.STRING,
+        min: 6
+    },
+    alamat: {
+        type: Sequelize.TEXT
+    },
+    password: {
+        type: Sequelize.STRING,
+        min: 6
+    },
+    role: {
+        type: Sequelize.ENUM('user', 'admin')
+    }
+}, {
+    freezeTableName: true
+})
+
+module.exports = User

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Components &rsaquo; Table &mdash; Stisla</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/modules/fontawesome/css/all.min.css">
+
+  <!-- CSS Libraries -->
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+                  class="fas fa-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            <div class="search-backdrop"></div>
+            <div class="search-result">
+              <div class="search-header">
+                Histories
+              </div>
+            </div>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+              class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Messages
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+
+            </div>
+          </li>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+              class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notifications
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+
+              <div class="dropdown-footer text-center">
+                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="image" src="/assets/images/adminProfile/{{profile.foto}}.jpg" class="rounded-circle mr-1">
+              <div class="d-sm-none d-lg-inline-block">Hi, {{profile.username}}</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title">Logged in 5 min ago</div>
+              <a href="/admin/{{profile.id_admin}}/profile" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="/admin/logout" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html">Stisla</a>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">St</a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li class="dropdown">
+              <a href="/admin/{{profile.id_admin}}" class="nav-link"><i
+                  class="fas fa-fire"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Barang</li>
+            <li class="dropdown">
+              <a href="/admin/{{profile.id_admin}}/barang" class="nav-link"><i class="fas fa-campground"></i>
+                <span>Daftar Barang</span></a>
+            </li>
+            <li class="menu-header">Transaksi</li>
+            <li class="dropdown active">
+              <a href="/admin/{{profile.id_admin}}/transaksi" class="nav-link"><i class="fas fa-columns"></i>
+                <span>Daftar Transaksi</span></a>
+            </li>
+            <li class="menu-header">Users</li>
+            <li class="dropdown">
+              <a href="/admin/{{profile.id_admin}}/users" class="nav-link"><i class="fas fa-users"></i>
+                <span>Daftar User</span></a>
+            </li>
+            </li>
+            <li class="menu-header">Pages</li>
+            <li class="dropdown">
+              <a href="/admin/{{profile.id_admin}}/profile" class="nav-link"><i class="far fa-user"></i>
+                <span>Profile</span></a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Daftar transaksi</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">Table</div>
+            </div>
+          </div>
+
+          <div class="section-body" id="get-id" data-id="{{profile.id_admin}}">
+            <h2 class="section-title">Table</h2>
+            <p class="section-lead">Daftar transaksi user di partner petualang</p>
+
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Daftar Transaksi</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-md text-center">
+                        <tr>
+                          <th>No</th>
+                          <th>User</th>
+                          <th>barang</th>
+                          <th>Harga</th>
+                          <th>jumlah</th>
+                          <th>Tgl.Sewa</th>
+                          <th>Tgl.Kembali</th>
+                          <th>Kirim / Pick up</th>
+                          <th>Total</th>
+                          <th>Pembayaran</th>
+                          <th>Status</th>
+                          <th>Aksi</th>
+                        </tr>
+                        {{#each transaksi}}
+                        <tr>
+                          <td>{{math @index '+' 1}}</td>
+                          <td>{{username}}</td>
+                          <td>{{nama_barang}}</td>
+                          <td>{{harga_barang}}</td>
+                          <td>{{jumlah}}</td>
+                          <td>{{tanggal_sewa}}</td>
+                          <td>{{tanggal_kembali}}</td>
+                          <td>{{kirim_barang}}</td>
+                          <td>{{math harga_barang '*' jumlah}}</td>
+                          <td>{{pembayaran}}</td>
+                          <td>{{status}}</td>
+                          <td>
+                            <button class="btn btn-secondary"
+                              data-id="{{nama_barang}},{{kirim_barang}},{{pembayaran}},{{tanggal_sewa}},{{tanggal_kembali}}"
+                              data-toggle="modal" data-target="#modalDetailTransaksi"><i
+                                class="fas fa-info"></i></button>
+                            {{#if isDisable}}
+                            <button class="btn btn-info disabled" data-toggle="modal"
+                              data-target="#modalUpdateTransaksi" data-id="{{status}},{{id_transaksi}}"><i
+                                class="fas fa-pencil-alt"></i></button>
+                            {{else}}
+                            <button class="btn btn-info" data-toggle="modal" data-target="#modalUpdateTransaksi"
+                              data-id="{{status}},{{id_transaksi}}"><i class="fas fa-pencil-alt"></i></button>
+                            {{/if}}
+                          </td>
+                          <td>
+                        </tr>
+                        {{/each}}
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card-footer text-right">
+                    <nav class="d-inline-block">
+                      <ul class="pagination mb-0">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1 <span
+                              class="sr-only">(current)</span></a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval
+            Azhar</a>
+        </div>
+        <div class="footer-right">
+
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Modal Update -->
+  <div class="modal fade" id="modalUpdateTransaksi" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Status</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form-update-transaksi" method="POST" class="mt-5">
+            <div class="row justify-content-center">
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <div class="form-group text-center w-100">
+                  <input type="text" name="status" id="status" class="form-control">
+                  <small class="text-muted form-text pt-2">Menunggu Konfirmasi / Diproses / Selesai</small>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <input type="submit" class="btn btn-info" value="Edit Transaksi">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Info -->
+  <div class="modal fade" id="modalDetailTransaksi" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Info Transaksi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="row">
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>Nama barang</label>
+                  <input type="text" name="nama_barang" id="nama_barang" class="form-control">
+                </div>
+              </div>
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <label>Pengiriman/Pengambilan</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-boxes"></i>
+                    </div>
+                  </div>
+                  <input type="text" name="pengiriman" id="pengiriman" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <label>Pembayaran</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-money-bill-alt"></i>
+                    </div>
+                  </div>
+                  <input type="text" name="nama_barang" id="pembayaran" class="form-control">
+                </div>
+              </div>
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <label>Pengembalian</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-boxes"></i>
+                    </div>
+                  </div>
+                  <input type="text" name="nama_barang" id="pengembalian" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>Tanggal Sewa</label>
+                  <input name="tanggal_sewa" type="date" id="tanggal_sewa" class="form-control datepicker">
+                  </di>
+                </div>
+              </div>
+              <div class="form-group col-12 col-sm-12 col-md-6">
+                <div class="form-group">
+                  <label>Tanggal Kembali</label>
+                  <input name="tanggal_kembali" id="tanggal_kembali" type="date" class="form-control datepicker">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-info" value="Buat Transaksi">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btnInfo = document.getElementsByTagName('tr')
+    let idx, res
+    for (idx = 0; idx < btnInfo.length; idx++) {
+      let a = btnInfo[idx + 1].getElementsByTagName('td')[11].getElementsByTagName('button')[0]
+      a.addEventListener('click', () => {
+        res = a.getAttributeNode('data-id').textContent.split(',')
+        document.getElementById('nama_barang').setAttribute('value', res[0])
+        document.getElementById('pengiriman').setAttribute('value', res[1].split('/', 1))
+        document.getElementById('pengembalian').setAttribute('value', res[1].split('/', 2, 1)[1])
+        document.getElementById('pembayaran').setAttribute('value', res[2])
+        document.getElementById('tanggal_sewa').setAttribute('value', res[3])
+        document.getElementById('tanggal_kembali').setAttribute('value', res[4])
+      })
+    }
+  </script>
+
+  <script>
+    const id = document.getElementById('get-id').getAttribute('data-id')
+    const btnUpdate = document.getElementsByTagName('tr')
+    let j, result
+    for (j = 0; j < btnUpdate.length; j++) {
+      let a = btnUpdate[j + 1].getElementsByTagName('td')[11].getElementsByTagName('button')[1]
+      a.addEventListener('click', () => {
+        result = a.getAttributeNode('data-id').textContent.split(',')
+        console.log(result)
+        document.getElementById('form-update-transaksi').setAttribute('action', `/admin/${id}/transaksi/${result[1]}`)
+        document.getElementById('status').setAttribute('value', result[0])
+      })
+    }
+  </script>
+
+
+  <!-- General JS Scripts -->
+  <script src="/assets/modules/jquery.min.js"></script>
+  <script src="/assets/modules/popper.js"></script>
+  <script src="/assets/modules/tooltip.js"></script>
+  <script src="/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="/assets/modules/moment.min.js"></script>
+  <script src="/assets/js/stisla.js"></script>
+
+  <!-- JS Libraies -->
+  <script src="/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="/assets/js/page/components-table.js"></script>
+
+  <!-- Template JS File -->
+  <script src="/assets/js/scripts.js"></script>
+  <script src="/assets/js/custom.js"></script>
+</body>
+
+</html>
