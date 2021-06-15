@@ -22,7 +22,9 @@ module.exports = {
                 password: Joi.string().min(6).required(),
                 role: Joi.string()
             })
+            let role = 'user'
             let data = { nama, telp, email, alamat, password, role }
+
             const result = userRegisterSchema.validate(data)
                 //hash password
             const salt = bcrypt.genSaltSync(10)
@@ -34,11 +36,12 @@ module.exports = {
                 res.render('registerUser', { success: false })
             } else {
                 User.create({
-                    id_user,
-                    nama_lengkap,
+                    nama,
+                    telp,
                     email,
-                    username,
-                    password
+                    alamat,
+                    password,
+                    role
                 }).then(res.render('registerUser', { success: true }))
             }
         } catch (error) {

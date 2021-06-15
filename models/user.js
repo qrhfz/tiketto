@@ -28,6 +28,7 @@ const User = db.define('users', {
         type: Sequelize.ENUM('user', 'admin')
     }
 }, {
+    timestamps: false,
     freezeTableName: true
 })
 

@@ -42,7 +42,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/', require('./routes/public'))
     // app.use('/admin', require('./routes/admin'))
-    // app.use('/user', require('./routes/user')) 
+app.use('/user', require('./routes/user'))
     // app.use('/barang', require('./routes/barang'))
 
 //running app
