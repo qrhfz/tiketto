@@ -80,9 +80,10 @@ module.exports = {
             } else {
                 User.findOne({
                     where: { email: email }
-                }).then(user => {
+                }).then(dataValues => {
+                    user = dataValues
                     if (user) {
-                        console.log(user)
+                        console.log('user ditemukan')
                         return bcrypt.compare(password, user.password)
                     } else {
                         throw new Error({ 'message': 'User tidak ditemukan' });
@@ -92,11 +93,13 @@ module.exports = {
                         let token
                         token = generateToken()
                         if (ress) {
+                            console.log('membuat token')
                             return token
                         }
                     }
                 }).then(token => {
                     if (token) {
+                        console.log('user ditemukan')
                         res.cookie('id', user.id)
                         res.cookie('email', user.email)
                         res.cookie('nama', user.nama)

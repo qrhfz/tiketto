@@ -30,7 +30,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', require('./routes/public'))
     // app.use('/admin', require('./routes/admin'))
 app.use('/user', require('./routes/user'))
-    // app.use('/barang', require('./routes/barang'))
+app.use('/event', require('./routes/event'))
 
 //running app
 app.listen(PORT, () => console.log(`App Running on port ${PORT}`))

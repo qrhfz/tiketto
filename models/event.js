@@ -28,7 +28,8 @@ const Event = db.define('event', {
         type: Sequelize.DATE
     }
 }, {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
 })
 
 module.exports = Event

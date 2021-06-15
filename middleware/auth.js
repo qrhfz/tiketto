@@ -1,8 +1,8 @@
 module.exports = {
-    adminAuth: async (req, res, next) => {
+    adminAuth: async(req, res, next) => {
         try {
             if (await !req.cookies.token) {
-                res.redirect('/admin/login')
+                res.redirect('/login')
             } else {
                 next()
             }
@@ -10,10 +10,10 @@ module.exports = {
             console.log(error)
         }
     },
-    userAuth: async (req, res, next) => {
+    userAuth: async(req, res, next) => {
         try {
             if (await !req.cookies.token) {
-                res.redirect('/user/login')
+                res.redirect('/login')
             } else {
                 next()
             }
