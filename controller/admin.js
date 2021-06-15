@@ -1,4 +1,4 @@
-const Admin = require('../models/admin')
+// const Admin = require('../models/admin')
 const bcrypt = require('bcryptjs')
 const generateToken = require('../services/generateToken')
 const uuid = require('uuid')

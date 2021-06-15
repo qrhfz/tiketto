@@ -3,29 +3,30 @@ const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
 const generateToken = require('../services/generateToken')
 const Joi = require('@hapi/joi')
-const Barang = require('../models/barang')
+    // const Barang = require('../models/barang')
 const Transaksi = require('../models/transaksi')
-const Keranjang = require('../models/keranjang')
+    // const Keranjang = require('../models/keranjang')
 const db = require('../config/db')
 const { QueryTypes, Sequelize, SELECT } = require('sequelize')
 const date = new Date()
 
 module.exports = {
-    create: async (req, res) => {
+    create: async(req, res) => {
         try {
-            let { id_user, nama_lengkap, email, username, password } = await req.body
+            let { nama, telp, email, alamat, password } = await req.body
             let userRegisterSchema = Joi.object({
-                id_user: Joi.string().guid({ version: 'uuidv4' }),
-                nama_lengkap: Joi.string().min(5).required(),
-                username: Joi.string().min(5).required(),
+                nama: Joi.string().min(5).required(),
+                telp: Joi.number().min(10).required(),
                 email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-                password: Joi.string().min(6).required()
+                alamat: Joi.string().min(10),
+                password: Joi.string().min(6).required(),
+                role: Joi.string()
             })
-            let data = { id_user, nama_lengkap, email, username, password }
+            let data = { nama, telp, email, alamat, password, role }
             const result = userRegisterSchema.validate(data)
-            //hash password
+                //hash password
             const salt = bcrypt.genSaltSync(10)
-            id_user = uuid.v4()
+                // id_user = uuid.v4()
             password = bcrypt.hashSync(password, salt)
             const { value, error } = result
             const valid = error == null
@@ -33,14 +34,18 @@ module.exports = {
                 res.render('registerUser', { success: false })
             } else {
                 User.create({
-                    id_user, nama_lengkap, email, username, password
+                    id_user,
+                    nama_lengkap,
+                    email,
+                    username,
+                    password
                 }).then(res.render('registerUser', { success: true }))
             }
         } catch (error) {
             console.log(error)
         }
     },
-    login: async (req, res) => {
+    login: async(req, res) => {
         try {
             const { email, password } = await req.body
             let user
@@ -87,7 +92,7 @@ module.exports = {
             console.log(error)
         }
     },
-    user: async (req, res) => {
+    user: async(req, res) => {
         try {
             const id_user = await req.cookies.id_user
             await User.findOne({
@@ -111,7 +116,7 @@ module.exports = {
         res.clearCookie("alamat")
         res.redirect('/user/login')
     },
-    etalase: async (req, res) => {
+    etalase: async(req, res) => {
         try {
             const profile = req.cookies
             await Barang.findAll()
@@ -122,16 +127,15 @@ module.exports = {
             console.log(error)
         }
     },
-    transaksi: async (req, res) => {
+    transaksi: async(req, res) => {
         try {
             const profile = req.cookies
-            let data, array = [], sts
+            let data, array = [],
+                sts
             const transaksi = await db.query(
-                `SELECT User.username,Keranjang.jumlah,Barang.nama_barang,Barang.harga_barang,Transaksi.status,Transaksi.id_transaksi,Transaksi.tanggal_sewa,Transaksi.tanggal_kembali,Transaksi.pembayaran,Transaksi.kirim_barang FROM Transaksi INNER JOIN User ON Transaksi.id_user = User.id_user INNER JOIN Keranjang ON Transaksi.id_keranjang = keranjang.id_keranjang INNER JOIN Barang ON Keranjang.id_barang = Barang.id_barang WHERE user.id_user='${profile.id_user}'`
-                , { type: QueryTypes.SELECT })
+                `SELECT User.username,Keranjang.jumlah,Barang.nama_barang,Barang.harga_barang,Transaksi.status,Transaksi.id_transaksi,Transaksi.tanggal_sewa,Transaksi.tanggal_kembali,Transaksi.pembayaran,Transaksi.kirim_barang FROM Transaksi INNER JOIN User ON Transaksi.id_user = User.id_user INNER JOIN Keranjang ON Transaksi.id_keranjang = keranjang.id_keranjang INNER JOIN Barang ON Keranjang.id_barang = Barang.id_barang WHERE user.id_user='${profile.id_user}'`, { type: QueryTypes.SELECT })
             data = await db.query(
-                `SELECT * FROM Keranjang INNER JOIN Barang ON Keranjang.id_barang = Barang.id_barang WHERE Keranjang.id_user='${req.cookies.id_user}'`
-                , { type: QueryTypes.SELECT })
+                `SELECT * FROM Keranjang INNER JOIN Barang ON Keranjang.id_barang = Barang.id_barang WHERE Keranjang.id_user='${req.cookies.id_user}'`, { type: QueryTypes.SELECT })
             array.push(data, transaksi)
 
             transaksi.forEach(element => {
@@ -150,7 +154,7 @@ module.exports = {
             console.log(error)
         }
     },
-    profile: async (req, res) => {
+    profile: async(req, res) => {
         try {
             const id_user = await req.cookies.id_user
             await User.findOne({
@@ -163,12 +167,17 @@ module.exports = {
             console.log(error)
         }
     },
-    update: async (req, res) => {
+    update: async(req, res) => {
         try {
             let { nama_lengkap, username, email, no_hp, alamat } = req.body
             let foto = `foto-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`
             await User.update({
-                nama_lengkap, username, email, no_hp, alamat, foto
+                nama_lengkap,
+                username,
+                email,
+                no_hp,
+                alamat,
+                foto
             }, {
                 where: { id_user: req.params.id }
             }).then(result => {
@@ -178,13 +187,22 @@ module.exports = {
             console.log(error)
         }
     },
-    createTransaksi: async (req, res) => {
+    createTransaksi: async(req, res) => {
         try {
             let { id_keranjang, kirim_barang, pembayaran, pengembalian, tanggal_sewa, tanggal_kembali } = req.body
-            let id_user = req.cookies.id_user, status = "Menunggu Konfirmasi", id_admin = '223034e6-e1e5-49f4-94fb-33ac407c0748'
+            let id_user = req.cookies.id_user,
+                status = "Menunggu Konfirmasi",
+                id_admin = '223034e6-e1e5-49f4-94fb-33ac407c0748'
             kirim_barang = kirim_barang.concat('/', ' ', pengembalian)
             await Transaksi.create({
-                id_keranjang, id_user, id_admin, status, tanggal_sewa, tanggal_kembali, pembayaran, kirim_barang
+                id_keranjang,
+                id_user,
+                id_admin,
+                status,
+                tanggal_sewa,
+                tanggal_kembali,
+                pembayaran,
+                kirim_barang
             }).then(result => {
                 res.redirect(`/user/${id_user}/transaksi`)
             })
