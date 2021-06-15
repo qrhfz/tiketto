@@ -12,12 +12,12 @@ user.post('/login', controller.login)
 user.get('/logout', controller.logout)
 user.get('/:id', auth.userAuth, controller.user)
 user.post('/:id', [auth.userAuth, uploadProfileImg.single('foto')], controller.update)
-user.get('/:id/barang', auth.userAuth, controller.etalase)
-user.get('/:id/transaksi', auth.userAuth, controller.transaksi)
-user.get('/:id/profile', auth.userAuth, controller.profile)
-user.post('/:id/keranjang', auth.userAuth, controllerKeranjang.create)
-user.post('/:id/transaksi', auth.userAuth, controller.createTransaksi)
-user.post('/:id/transaksi/:id', auth.userAuth, transaksiController.update)
+    // user.get('/:id/barang', auth.userAuth, controller.etalase)
+    // user.get('/:id/transaksi', auth.userAuth, controller.transaksi)
+    // user.get('/:id/profile', auth.userAuth, controller.profile)
+    // user.post('/:id/keranjang', auth.userAuth, controllerKeranjang.create)
+    // user.post('/:id/transaksi', auth.userAuth, controller.createTransaksi)
+    // user.post('/:id/transaksi/:id', auth.userAuth, transaksiController.update)
 
 
 module.exports = user
