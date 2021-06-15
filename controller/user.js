@@ -1,14 +1,8 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
-const uuid = require('uuid')
 const generateToken = require('../services/generateToken')
 const Joi = require('@hapi/joi')
-    // const Barang = require('../models/barang')
-const Transaksi = require('../models/transaksi')
-    // const Keranjang = require('../models/keranjang')
-const db = require('../config/db')
-const { QueryTypes, Sequelize, SELECT } = require('sequelize')
-const date = new Date()
+
 
 module.exports = {
     create: async(req, res) => {

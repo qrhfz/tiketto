@@ -1,9 +1,11 @@
 const public = require('express').Router()
+const userController = require('../controller/user')
 
 public.get('/', (req, res) => {
     res.render('index')
 })
 public.get('/register', (req, res) => { res.render('registerUser') })
+public.post('/register', userController.create)
 public.get('/makanan', (req, res) => {
     res.render('public/')
 })

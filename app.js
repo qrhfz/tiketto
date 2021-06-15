@@ -20,20 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
     // app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.engine('handlebars', exphbs({
-    helpers: {
-        // Function to do basic mathematical operation in handlebar
-        math: function(lvalue, operator, rvalue) {
-            lvalue = parseFloat(lvalue);
-            rvalue = parseFloat(rvalue);
-            return {
-                "+": lvalue + rvalue,
-                "-": lvalue - rvalue,
-                "*": lvalue * rvalue,
-                "/": lvalue / rvalue,
-                "%": lvalue % rvalue
-            }[operator];
-        }
-    }
+    helpers: require('./config/handlebars-helpers')
 }))
 app.set('view engine', 'handlebars')
     //allow access sub dir on view
