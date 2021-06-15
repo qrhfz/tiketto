@@ -76,13 +76,17 @@ module.exports = {
             const valid = error == null
             if (!valid) {
                 console.log(error)
+                throw new Error({ 'message': 'User tidak ditemukan' });
             } else {
                 User.findOne({
                     where: { email: email }
-                }).then(dataValues => {
-                    user = dataValues
-                    console.log(user)
-                    return bcrypt.compare(password, dataValues.password)
+                }).then(user => {
+                    if (user) {
+                        console.log(user)
+                        return bcrypt.compare(password, user.password)
+                    } else {
+                        throw new Error({ 'message': 'User tidak ditemukan' });
+                    }
                 }).then((ress) => {
                     if (ress) {
                         let token
@@ -106,7 +110,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
+            res.render('loginUser', { success: false })
         }
     },
     logout: (req, res) => {

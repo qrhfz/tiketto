@@ -6,16 +6,15 @@ public.get('/', (req, res) => {
 })
 public.get('/register', (req, res) => { res.render('registerUser') })
 public.post('/register', userController.create)
-public.get('/makanan', (req, res) => {
-    res.render('public/')
-})
+public.get('/login', (req, res) => { res.render('loginUser') })
+public.post('/login', userController.login)
+public.get('/logout', userController.logout)
+
 
 public.get('/about', (req, res) => {
     res.render('public/about')
 })
-public.get('/makanan/:id', (req, res) => {
-    res.render('/public/detail')
-})
+
 public.get('/jadwal', (req, res) => {
     res.render('/public/jadwal')
 })
