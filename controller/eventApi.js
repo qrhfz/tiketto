@@ -5,7 +5,8 @@ var date = new Date()
 module.exports = {
     create: async(req, res) => {
         try {
-            let { id_admin, nama, lokasi, deskripsi, gambar, harga, tanggal } = req.body
+            let id_admin = req.cookies.id
+            let { nama, lokasi, deskripsi, gambar, harga, tanggal } = req.body
             const schema = Joi.object({
                 id_admin: Joi.number().required(),
                 nama: Joi.string().required(),

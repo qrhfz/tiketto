@@ -15,7 +15,8 @@ const User = db.define('users', {
     },
     email: {
         type: Sequelize.STRING,
-        min: 6
+        min: 6,
+        unique: true
     },
     alamat: {
         type: Sequelize.TEXT
