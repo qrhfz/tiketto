@@ -1,5 +1,6 @@
 const public = require('express').Router()
 const userController = require('../controller/user')
+const auth = require('../middleware/auth')
 
 public.get('/', (req, res) => {
     res.render('index')
@@ -9,7 +10,7 @@ public.post('/register', userController.create)
 public.get('/login', (req, res) => { res.render('loginUser') })
 public.post('/login', userController.login)
 public.get('/logout', userController.logout)
-
+public.get('/testadminpage', auth.userAuth, (req, res) => { res.json({ kamu: 'admin' }) })
 
 public.get('/about', (req, res) => {
     res.render('public/about')

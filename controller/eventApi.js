@@ -44,12 +44,12 @@ module.exports = {
     },
     delete: async(req, res) => {
         try {
-            Barang.destroy({
-                    where: { id_barang: await req.params.id }
+            Event.destroy({
+                    where: { id: await req.params.id }
                 }).then(console.log('barang berhasil dihapus'))
                 .then(result => {
                     if (result == 1) {
-                        res.json({ status: 200, msg: 'Berhasil Hapus Barang' })
+                        res.json({ status: 200, msg: 'Berhasil Hapus Event' })
                     } else {
                         res.json({ status: 401, msg: 'Gagal Hapus, Data tidak ada' })
                     }
@@ -60,19 +60,20 @@ module.exports = {
     },
     update: async(req, res) => {
         try {
-            let foto = `foto-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`
-            let { nama_barang, harga_barang, stock } = req.body
-            let data = { nama_barang, harga_barang, stock, foto }
-            Barang.update({
-                nama_barang: req.body.nama_barang,
-                harga_barang: req.body.harga_barang,
-                stock: req.body.stock,
-                foto: foto
+            // let foto = `foto-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`
+            let { nama, lokasi, deskripsi, harga, tanggal } = req.body
+            let data = { nama, lokasi, deskripsi, harga, tanggal }
+            Event.update({
+                nama: req.body.nama,
+                lokasi: req.body.lokasi,
+                deskripsi: req.body.deskripsi,
+                harga: req.body.harga,
+                tanggal: req.body.tanggal
             }, {
-                where: { id_barang: req.params.id }
+                where: { id: req.params.id }
             }).then(result => {
                 if (result == 1) {
-                    res.json({ status: 200, msg: 'berhasil Update Barang', data })
+                    res.json({ status: 200, msg: 'berhasil Update Event', data })
                 } else {
                     res.json({ status: 401, msg: 'Gagal update , Barang tidak ditemukan' })
                 }
@@ -83,7 +84,7 @@ module.exports = {
     },
     showAll: async(req, res) => {
         try {
-            await Barang.findAll()
+            await Event.findAll()
                 .then(data => {
                     res.json(data)
                 })
