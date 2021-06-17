@@ -8,16 +8,18 @@ async function uploadGambar(req) {
             let fileGambar = req.files.gambar;
             let ext = fileGambar.name.split('.').pop();
             let namaFileGambar = uuidv4() + '.' + ext
-                // console.log('file upload :', namaFileGambar)
             uploadPath = __dirname + '../../public/assets/images/fotoevent/' + namaFileGambar;
 
             fileGambar.mv(uploadPath, function(err) {
                 if (err) {
                     console.log(err)
+                    reject(new Error("Server gagal memproses file"))
                 }
                 console.log('file upload :', namaFileGambar)
                 resolve(namaFileGambar)
             })
+        } else {
+            reject(new Error("File tidak diupload"))
         }
     })
 
@@ -27,6 +29,7 @@ module.exports = {
     create: async(req, res) => {
         try {
             gambar = await uploadGambar(req)
+
             console.log('gambar adalah ', gambar)
             let id_admin = req.cookies.id
             let { nama, lokasi, deskripsi, harga, tanggal } = req.body
@@ -61,7 +64,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
+            res.json({ error: error.message })
         }
     },
     delete: async(req, res) => {
@@ -82,7 +86,7 @@ module.exports = {
     },
     update: async(req, res) => {
         try {
-            // let foto = `foto-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`
+            gambar = await uploadGambar(req)
             let { nama, lokasi, deskripsi, harga, tanggal } = req.body
             let data = { nama, lokasi, deskripsi, harga, tanggal }
             Event.update({
@@ -90,7 +94,8 @@ module.exports = {
                 lokasi: req.body.lokasi,
                 deskripsi: req.body.deskripsi,
                 harga: req.body.harga,
-                tanggal: req.body.tanggal
+                tanggal: req.body.tanggal,
+                gambar: gambar
             }, {
                 where: { id: req.params.id }
             }).then(result => {
