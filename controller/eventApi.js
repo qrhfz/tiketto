@@ -1,12 +1,35 @@
 const Event = require('../models/event')
 const Joi = require('@hapi/joi')
-var date = new Date()
+const { v4: uuidv4 } = require('uuid');
+
+async function uploadGambar(req) {
+    return new Promise((resolve, reject) => {
+        if (req.files && Object.keys(req.files).length > 0) {
+            let fileGambar = req.files.gambar;
+            let ext = fileGambar.name.split('.').pop();
+            let namaFileGambar = uuidv4() + '.' + ext
+                // console.log('file upload :', namaFileGambar)
+            uploadPath = __dirname + '../../public/assets/images/fotoevent/' + namaFileGambar;
+
+            fileGambar.mv(uploadPath, function(err) {
+                if (err) {
+                    console.log(err)
+                }
+                console.log('file upload :', namaFileGambar)
+                resolve(namaFileGambar)
+            })
+        }
+    })
+
+}
 
 module.exports = {
     create: async(req, res) => {
         try {
+            gambar = await uploadGambar(req)
+            console.log('gambar adalah ', gambar)
             let id_admin = req.cookies.id
-            let { nama, lokasi, deskripsi, gambar, harga, tanggal } = req.body
+            let { nama, lokasi, deskripsi, harga, tanggal } = req.body
             const schema = Joi.object({
                 id_admin: Joi.number().required(),
                 nama: Joi.string().required(),
@@ -18,7 +41,6 @@ module.exports = {
             })
             let data = { id_admin, nama, lokasi, deskripsi, gambar, harga, tanggal }
             const result = schema.validate(data)
-                // foto = `foto-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}`
             const { value, error } = result
             const valid = error == null
             if (!valid) {
@@ -34,7 +56,7 @@ module.exports = {
                     harga,
                     tanggal
                 }).then((result) => {
-                    console.log(result)
+                    // console.log(result)
                     res.json({ status: 201, message: 'Berhasil Tambah Event', data })
                 })
             }

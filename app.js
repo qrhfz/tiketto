@@ -4,13 +4,15 @@ const cookieParser = require('cookie-parser')
 const exphbs = require('express-handlebars')
 const db = require('./config/db')
 const path = require('path')
-const bodyParser = require('body-parser')
+    // const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload');
 
 
 
 //setup app
 const app = express()
-
+    // use fileupload
+app.use(fileUpload());
 //create db conection
 db.authenticate()
     .then(() => console.log('database connected'))
