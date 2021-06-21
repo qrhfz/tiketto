@@ -1,10 +1,9 @@
 const public = require('express').Router()
 const userController = require('../controller/user')
+const eventController = require('../controller/event')
 const auth = require('../middleware/auth')
 
-public.get('/', (req, res) => {
-    res.render('index')
-})
+public.get('/', eventController.showAll)
 public.get('/register', (req, res) => { res.render('registerUser') })
 public.post('/register', userController.create)
 public.get('/login', (req, res) => { res.render('loginUser') })
