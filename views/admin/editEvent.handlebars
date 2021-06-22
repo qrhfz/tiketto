@@ -1,19 +1,20 @@
 <div class="container p-3">
+    <h1>Edit Event</h1>
     <form method="POST" action="/event" enctype = "multipart/form-data">
 
         <div class="form-group p-1">
             <label for="nama">Nama Event</label>
-            <input type="text" class="form-control" id="nama" name='nama'>
+            <input type="text" class="form-control" id="nama" name='nama' value="{{data.dataValues.nama}}">
         </div>
 
         <div class="form-group p-1">
             <label for="lokasi">Lokasi</label>
-            <input type="text" class="form-control" id="lokasi" name="lokasi">
+            <input type="text" class="form-control" id="lokasi" name="lokasi" value="{{data.dataValues.lokasi}}">
         </div>
 
         <div class="form-group p-1">
             <label for="deskripsi">Deskripsi</label>
-            <textarea class="form-control" id="deskripsi" name="deskripsi" ></textarea>
+            <textarea class="form-control" id="deskripsi" name="deskripsi" >{{data.dataValues.deskripsi}}</textarea>
         </div>
 
         <div class="form-group p-1">
@@ -23,11 +24,12 @@
 
         <div class="form-group p-1">
             <label for="harga">Harga</label>
-            <input type="number" class="form-control" id="harga" name="harga">
+            <input type="number" class="form-control" id="harga" name="harga" value="{{data.dataValues.harga}}">
         </div>
         <div class="form-group p-1">
             <label for="harga">Tanggal</label>
-            <input id="tanggal" name="tanggal" width="250" type="date" name="tanggal" required />
+            <input id="tanggal" name="tanggal" width="250" type="date" name="tanggal" required value="{{data.dataValues.tanggal}}"/>
+            
         </div>
         <div class="p-1">
             <button type="submit" class="btn btn-primary">Kirim</button>

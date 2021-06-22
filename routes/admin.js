@@ -1,4 +1,5 @@
 const admin = require('express').Router()
+const eventController = require('../controller/event')
     // const controler = require('../controller/admin')
 const auth = require('../middleware/auth')
     // const barangController = require('../controller/barang')
@@ -7,13 +8,9 @@ const auth = require('../middleware/auth')
     // const uploadImgAdmin = require('../services/uploadImgAdmin')
 
 
-admin.get('/', auth.adminAuth, (req, res) => {
-    res.render('admin/index')
-})
+admin.get('/', auth.adminAuth, eventController.showEventsByAdmin)
+admin.get('/buat-event', auth.adminAuth, (req, res) => res.render('admin/buatEvent'))
 
-admin.get('/buatevent', (req, res) => {
-    res.render('admin/buatEvent')
-})
 
 // admin.get('/login', (req, res) => {
 //     res.render('loginAdmin')

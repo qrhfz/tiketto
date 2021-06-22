@@ -1,1 +1,30 @@
-ini index admin
+<div class="container p-3">
+    <a href="/admin/buat-event" type="button" class="btn btn-primary">Buat Event</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nama Event</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <th scope="col">{{dataValues.id}}</th>
+                <th scope="col">{{dataValues.nama}}</th>
+                <th scope="col">
+                    <button type="button" class="btn btn-warning">Edit</button>
+                    <button type="button" class="btn btn-danger">Hapus</button>
+                </th>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    
+        
+    
+</div>

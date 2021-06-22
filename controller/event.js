@@ -4,7 +4,9 @@ const { v4: uuidv4 } = require('uuid');
 
 async function uploadGambar(req) {
     return new Promise((resolve, reject) => {
+        console.log(req.files)
         if (req.files && Object.keys(req.files).length > 0) {
+
             let fileGambar = req.files.gambar;
             let ext = fileGambar.name.split('.').pop();
             let namaFileGambar = uuidv4() + '.' + ext
@@ -59,7 +61,7 @@ module.exports = {
                     tanggal
                 }).then((result) => {
                     // console.log(result)
-                    res.json({ status: 201, message: 'Berhasil Tambah Event', data })
+                    res.redirect('/admin')
                 })
             }
         } catch (error) {
@@ -99,9 +101,9 @@ module.exports = {
                 where: { id: req.params.id }
             }).then(result => {
                 if (result == 1) {
-                    res.json({ status: 200, msg: 'berhasil Update Event', data })
+                    res.redirect('/event/' + req.params.id)
                 } else {
-                    res.json({ status: 401, msg: 'Gagal update , Barang tidak ditemukan' })
+                    // res.json({ status: 401, msg: 'Gagal update , Barang tidak ditemukan' })
                 }
             })
         } catch (error) {
@@ -128,6 +130,35 @@ module.exports = {
                 .then(data => {
                     // console.log(data)
                     res.render('eventDetail', { data })
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    editPage: async(req, res) => {
+        try {
+            await Event.findOne({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                .then(data => {
+                    // console.log(data)
+                    res.render('admin/editEvent', { data })
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    showEventsByAdmin: async(req, res) => {
+        try {
+            await Event.findAll({
+                    where: {
+                        id_admin: req.cookies.id
+                    }
+                })
+                .then(data => {
+                    res.render('admin/index', { data })
                 })
         } catch (error) {
             console.log(error)
