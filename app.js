@@ -30,7 +30,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(__dirname + '/public'));
 
 app.use('/', require('./routes/public'))
-    // app.use('/admin', require('./routes/admin'))
+app.use('/admin', require('./routes/admin'))
 app.use('/user', require('./routes/user'))
 app.use('/event', require('./routes/event'))
 

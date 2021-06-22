@@ -1,7 +1,7 @@
 module.exports = {
     adminAuth: async(req, res, next) => {
         try {
-            if (req.cookies.token && req.cookies.role != 'admin') {
+            if (!req.cookies.token || req.cookies.role != 'admin') {
                 res.redirect('/login')
             } else {
                 next()
