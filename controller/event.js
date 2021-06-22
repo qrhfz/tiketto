@@ -21,7 +21,7 @@ async function uploadGambar(req) {
                 resolve(namaFileGambar)
             })
         } else {
-            reject(new Error("File tidak diupload"))
+            resolve(null)
         }
     })
 }
@@ -75,11 +75,7 @@ module.exports = {
                     where: { id: await req.params.id }
                 }).then(console.log('barang berhasil dihapus'))
                 .then(result => {
-                    if (result == 1) {
-                        res.json({ status: 200, msg: 'Berhasil Hapus Event' })
-                    } else {
-                        res.json({ status: 401, msg: 'Gagal Hapus, Data tidak ada' })
-                    }
+                    res.redirect('/admin')
                 })
         } catch (error) {
             console.log(error)
@@ -89,15 +85,23 @@ module.exports = {
         try {
             gambar = await uploadGambar(req)
             let { nama, lokasi, deskripsi, harga, tanggal } = req.body
-            let data = { nama, lokasi, deskripsi, harga, tanggal }
-            Event.update({
-                nama: req.body.nama,
-                lokasi: req.body.lokasi,
-                deskripsi: req.body.deskripsi,
-                harga: req.body.harga,
-                tanggal: req.body.tanggal,
+
+
+            let data = gambar ? {
+                nama: nama,
+                lokasi: lokasi,
+                deskripsi: deskripsi,
+                harga: harga,
+                tanggal: tanggal,
                 gambar: gambar
-            }, {
+            } : {
+                nama: nama,
+                lokasi: lokasi,
+                deskripsi: deskripsi,
+                harga: harga,
+                tanggal: tanggal,
+            }
+            Event.update(data, {
                 where: { id: req.params.id }
             }).then(result => {
                 if (result == 1) {
