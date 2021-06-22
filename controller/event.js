@@ -117,5 +117,20 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+    showOne: async(req, res) => {
+        try {
+            await Event.findOne({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                .then(data => {
+                    console.log(data)
+                    res.render('eventDetail', { data })
+                })
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

@@ -1,0 +1,48 @@
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h1>{{data.dataValues.nama}}</h1>
+        <div class="row">
+            <div class="col-sm">
+                <img class="img-fluid" src="/assets/images/fotoevent/{{data.dataValues.gambar}}" alt="" srcset="">
+
+            </div>
+            <div class="col-sm">
+                <dl class="row">
+                    <dt class="sol-sm-3">
+                        Harga
+                    </dt>
+                    <dd class="col-sm-9">
+                       Rp. {{data.dataValues.harga}}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="sol-sm-3">
+                        Lokasi
+                    </dt>
+                    <dd class="col-sm-9">
+                        {{data.dataValues.lokasi}}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="sol-sm-3">
+                        Tanggal
+                    </dt>
+                    <dd class="col-sm-9">
+                        {{data.dataValues.tanggal}}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt class="sol-sm-3">
+                        Deskripsi
+                    </dt>
+                    <dd class="col-sm-9">
+                        {{data.dataValues.deskripsi}}
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+    </div>
+</section>
