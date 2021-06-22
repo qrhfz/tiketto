@@ -126,7 +126,7 @@ module.exports = {
                     }
                 })
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     res.render('eventDetail', { data })
                 })
         } catch (error) {
